@@ -1,0 +1,8 @@
+# ninja log v7
+3	1706	7872685977286494	CMakeFiles/hello.dir/hello.cpp.obj	db50225f1b06b05a
+30	3138	7872689431239950	hello.exe	aab288e88d4e9f52
+21	1966	7872690656782010	build.ninja	9dd546419ef87008
+21	1966	7872690656716707	C:/Users/haric/OneDrive/Desktop/cpp-gitworkflow/build/cmake_install.cmake	9dd546419ef87008
+44	413	7872687640822035	CMakeFiles/hello.dir/welcome.cpp.obj	5de21093757b8aaa
+5	529	7872691227471775	CMakeFiles/hello.dir/hello.cpp.obj	db50225f1b06b05a
+530	770	7872691232718470	hello.exe	aab288e88d4e9f52

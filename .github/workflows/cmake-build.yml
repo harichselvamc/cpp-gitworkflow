@@ -1,0 +1,44 @@
+name: CMake Build & Run
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install dependencies (Ubuntu)
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake ninja-build build-essential
+
+      - name: Install dependencies (Windows)
+        if: matrix.os == 'windows-latest'
+        run: |
+          choco install -y cmake --installargs="'ADD_CMAKE_TO_PATH=System'"
+          choco install -y ninja
+        shell: cmd
+
+      - name: Configure (CMake)
+        run: cmake -S . -B build -G Ninja
+
+      - name: Build
+        run: cmake --build build --config Release
+
+      - name: Run executable (Linux/macOS)
+        if: matrix.os == 'ubuntu-latest'
+        run: ./build/hello
+
+      - name: Run executable (Windows)
+        if: matrix.os == 'windows-latest'
+        run: build\hello.exe
+        shell: cmd

@@ -15,6 +15,15 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
+      - name: Clean previous build dir (Ubuntu)
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          rm -rf build
+      - name: Clean previous build dir (Windows)
+        if: matrix.os == 'windows-latest'
+        run: rmdir /s /q build || exit 0
+        shell: cmd
+
       - name: Install dependencies (Ubuntu)
         if: matrix.os == 'ubuntu-latest'
         run: |
@@ -34,7 +43,7 @@ jobs:
       - name: Build
         run: cmake --build build --config Release
 
-      - name: Run executable (Linux/macOS)
+      - name: Run executable (Linux)
         if: matrix.os == 'ubuntu-latest'
         run: ./build/hello
 
